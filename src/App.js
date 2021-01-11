@@ -1,17 +1,19 @@
-import React, { useEffect } from 'react';
-import { Counter } from './conponents/Counter';
-import { Axios } from './helper/axios_config';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Route, Switch
+} from "react-router-dom";
+import Login from './pages/Login';
 
 function App() {
-
-  useEffect(() => {
-    Axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response => {
-      console.log({ response });
-    });
-  }, []);
-
   return (
-    <Counter />
+    <Router >
+      <Switch>
+        <Route path="/">
+          <Login />
+        </Route>
+      </Switch>
+    </Router >
   );
 }
 
