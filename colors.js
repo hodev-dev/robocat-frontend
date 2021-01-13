@@ -1,6 +1,15 @@
 module.exports = {
   black: '#000',
   white: '#fff',
+  arc: {
+    dark_1: '#222336',
+    dark_2: '#262842',
+    dark_3: '#2F304B',
+    accent_1: '#6C7BFF',
+    accent_2: '#13E398',
+    accent_3: '#F14080',
+    light_1: '#FDE7E7'
+  },
   rose: {
     50: '#fff1f2',
     100: '#ffe4e6',
