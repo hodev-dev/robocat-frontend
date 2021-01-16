@@ -7,11 +7,15 @@ export const authSlice = createSlice({
     login: (state, authResponse) => {
       state.isLogedIn = authResponse.payload.data.isLogedIn;
       state.user = authResponse.payload.data.user;
+    },
+    logout: state => {
+      state.isLogedIn = false;
+      state.user = null;
     }
   }
 });
 
-export const { login } = authSlice.actions;
+export const { login, logout } = authSlice.actions;
 
 // selectors
 

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Header from '../conponents/Header.jsx';
 import Logo from '../conponents/Logo';
 import Scafold from '../conponents/Scafold.jsx';
 import { Axios } from '../helper/axios_config';
+import { login } from '../redux/authSlice';
 
 const Login = () => {
-  let history = useHistory();
-
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({ email: '', password: '' });
 
   const handleForm = (event) => {
@@ -16,10 +16,8 @@ const Login = () => {
 
   const submitForm = (event) => {
     event.preventDefault();
-    console.log({ formData });
     Axios.post('http://localhost:8000/login', { email: formData.email, password: formData.password }).then((response) => {
-      console.log({ response });
-      history.push('user')
+      dispatch(login(response));
     }).catch((err) => {
       console.log({ err });
     });

@@ -24,6 +24,7 @@
     "react-scripts": "4.0.1",
     "react-spinners": "^0.10.4",
     "react-spinners-kit": "^1.9.1",
+    "redux-persist": "^6.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "webpack": "^5.12.3"
   },
