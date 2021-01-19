@@ -1,11 +1,15 @@
 import produce from "immer";
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Header from '../conponents/Header.jsx';
 import Logo from '../conponents/Logo';
 import Scafold from '../conponents/Scafold.jsx';
 import { Axios } from '../helper/axios_config.js';
+import { login } from '../redux/authSlice';
 
 const Regester = () => {
+
+  const dispatch = useDispatch();
   const [_name, setName] = useState('');
   const [_email, setEmail] = useState('');
   const [_password, setPassword] = useState('');
@@ -46,8 +50,10 @@ const Regester = () => {
       setErrors(nextState);
     }
     else {
-      Axios.post('regester', { email: _email, password: _password, name: _name }).then((result) => {
-        console.log({ result });
+      Axios.post('regester', { email: _email, password: _password, name: _name }).then((response) => {
+        console.log({ response });
+        setErrors({});
+        dispatch(login(response))
       }).catch((err) => {
         if (err.response) {
           console.log(err.response.data.errors);
@@ -71,7 +77,7 @@ const Regester = () => {
     <Scafold className={''}>
       <Header />
       <div className={"flex flex-col w-full h-screen sm:items-center sm:justify-center"}>
-        <div className={(errors) ? "flex p-5 flex-col items-end w-full h-auto text-red-400 rounded-md sm:p-12 lg:w-5/12 bg-arc-dark_3" : 'hidden'}>
+        <div className={(JSON.stringify(errors) !== '{}') ? "flex p-5 flex-col items-end w-full h-auto text-red-400 rounded-md sm:p-12 lg:w-5/12 bg-arc-dark_3" : 'hidden'}>
           {renderError()}
         </div>
         <form className={"flex flex-col items-center justify-center w-full h-auto rounded-md sm:p-12 lg:w-5/12 bg-arc-dark_1"}>
