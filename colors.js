@@ -2,9 +2,9 @@ module.exports = {
   black: '#000',
   white: '#fff',
   arc: {
-    dark_1: '#222336',
-    dark_2: '#262842',
-    dark_3: '#2F304B',
+    dark_1: '#18181d',
+    dark_2: '#202026',
+    dark_3: '#202026',
     accent_1: '#6C7BFF',
     accent_2: '#13E398',
     accent_3: '#F14080',
