@@ -54,15 +54,24 @@ const Explorer = () => {
     switch (collectionStatus) {
       case STATUS.LOADING:
         return (
-          <Loading />
+          <div className={"w-8/12"}>
+            <Loading />
+          </div>
         );
       case STATUS.SUCCESS:
         return genres.map((selection, index) => {
           return (
-            <div className={"w-full h-auto"}>
-              <div key={index * Math.random()} className={"flex flex-col flex-1 h-auto mt-2 rounded-lg"}>
-                <h1 className={"text-4xl text-white"}>{selection.title}</h1>
-                <div className={"flex flex-row h-auto p-2 mt-2 bg-arc-dark_1"}>
+            <div className={"w-8/12 h-auto"}>
+              <div key={index * Math.random()} className={"flex flex-col flex-1 h-auto rounded-lg"}>
+                <div className={"flex flex-row items-center w-full p-2 h-14"}>
+                  <div className={"flex justify-start flex-1 "}>
+                    <h1 className={"p-1 text-2xl text-gray-200"}>{'more'}</h1>
+                  </div>
+                  <div className={"flex justify-end flex-1"}>
+                    <h1 className={"self-end text-4xl text-white"}>{selection.title}</h1>
+                  </div>
+                </div>
+                <div className={"flex flex-row h-auto p-2 bg-arc-dark_1"}>
                   {render_selection_games(selection)}
                 </div>
               </div >
@@ -80,72 +89,22 @@ const Explorer = () => {
     <Scafold className={''}>
       <Header />
       <div className={"flex flex-col items-center w-full h-auto"}>
-        <div className={"w-full h-auto"}>
-          <h1 className={"mt-1 ml-1 text-4xl text-white"}>Platforms</h1>
+        <div className={"w-8/12 h-auto"}>
           <div className={"flex flex-row flex-wrap w-full h-auto p-2 mt-2 rounded-lg bg-arc-dark_1"}>
-            <div className={"flex items-center justify-center flex-1 h-24 bg-white rounded-lg"}>
-              <p className={"text-3xl font-bold text-pink-800"}>PC</p>
+            <div className={"flex items-center justify-center flex-1 h-16 bg-white rounded-lg"}>
+              <p className={"text-3xl font-bold text-arc-dark_3"}>Genres</p>
             </div>
-            <div className={"flex items-center justify-center flex-1 h-24 ml-5 bg-white rounded-lg"}>
-              <p className={"text-3xl font-bold text-red-500"}>Linux</p>
+            <div className={"flex items-center justify-center flex-1 h-16 ml-5 bg-white rounded-lg"}>
+              <p className={"text-3xl font-bold text-arc-dark_3"}>Platforms</p>
             </div>
-            <div className={"flex items-center justify-center flex-1 h-24 ml-5 bg-white rounded-lg shadow-lg"}>
-              <p className={"text-3xl font-bold text-green-600"}>Xbox</p>
+            <div className={"flex items-center justify-center flex-1 h-16 ml-5 bg-white rounded-lg shadow-lg"}>
+              <p className={"text-3xl font-bold text-arc-dark_3"}>Stores</p>
             </div>
-            <div className={"flex items-center justify-center flex-1 h-24 ml-5 bg-white rounded-lg"}>
-              <p className={"text-3xl font-bold text-blue-800"}>PlayStation</p>
+            <div className={"flex items-center justify-center flex-1 h-16 ml-5 bg-white rounded-lg shadow-lg"}>
+              <p className={"text-3xl font-bold text-arc-dark_3"}>Collections</p>
             </div>
-            <div className={"flex items-center justify-center flex-1 h-24 ml-5 bg-white rounded-lg"}>
-              <p className={"text-3xl font-bold text-black"}>IOS</p>
-            </div>
-            <div className={"flex items-center justify-center flex-1 h-24 ml-5 bg-white rounded-lg"}>
-              <p className={"text-3xl font-bold text-green-500"}>Android</p>
-            </div>
-          </div>
-        </div>
-        <div className={"w-full h-auto"}>
-          <h1 className={"mt-1 ml-1 text-4xl text-white"}>Stores</h1>
-          <div className={"flex flex-row w-full h-auto p-2 mt-2 rounded-lg bg-arc-dark_1"}>
-            <div className={"flex items-center justify-center flex-1 h-24 bg-white rounded-lg"}>
-              <p className={"text-3xl font-bold text-indigo-800"}>Steam</p>
-            </div>
-            <div className={"flex items-center justify-center flex-1 h-24 ml-5 bg-white rounded-lg"}>
-              <p className={"text-3xl font-bold text-yellow-600"}>Epic Games</p>
-            </div>
-            <div className={"flex items-center justify-center flex-1 h-24 ml-5 bg-white rounded-lg shadow-lg"}>
-              <p className={"text-3xl font-bold text-green-600"}>Xbox</p>
-            </div>
-            <div className={"flex items-center justify-center flex-1 h-24 ml-5 bg-white rounded-lg"}>
-              <p className={"text-3xl font-bold text-blue-800"}>PlayStation</p>
-            </div>
-            <div className={"flex items-center justify-center flex-1 h-24 ml-5 bg-white rounded-lg"}>
-              <p className={"text-3xl font-bold text-black"}>Apple Store</p>
-            </div>
-            <div className={"flex items-center justify-center flex-1 h-24 ml-5 bg-white rounded-lg"}>
-              <p className={"text-3xl font-bold text-green-500"}>Google Play</p>
-            </div>
-          </div>
-        </div>
-        <div className={"w-full h-auto"}>
-          <h1 className={"mt-1 ml-1 text-4xl text-white"}>Genres</h1>
-          <div className={"flex flex-row w-full h-auto p-2 mt-2 rounded-lg bg-arc-dark_1"}>
-            <div className={"flex items-center justify-center flex-1 h-24 bg-white rounded-lg"}>
-              <p className={"text-3xl font-bold text-black"}>Action</p>
-            </div>
-            <div className={"flex items-center justify-center flex-1 h-24 ml-5 bg-white rounded-lg"}>
-              <p className={"text-3xl font-bold text-black"}>Puzzle</p>
-            </div>
-            <div className={"flex items-center justify-center flex-1 h-24 ml-5 bg-white rounded-lg shadow-lg"}>
-              <p className={"text-3xl font-bold text-black"}>FPS</p>
-            </div>
-            <div className={"flex items-center justify-center flex-1 h-24 ml-5 bg-white rounded-lg"}>
-              <p className={"text-3xl font-bold text-black"}>Advanture</p>
-            </div>
-            <div className={"flex items-center justify-center flex-1 h-24 ml-5 bg-white rounded-lg"}>
-              <p className={"text-3xl font-bold text-black"}>Platformer</p>
-            </div>
-            <div className={"flex items-center justify-center flex-1 h-24 ml-5 bg-white rounded-lg"}>
-              <p className={"text-3xl font-bold text-black"}>Sports</p>
+            <div className={"flex items-center justify-center flex-1 h-16 ml-5 bg-white rounded-lg shadow-lg"}>
+              <p className={"text-3xl font-bold text-arc-dark_3"}>Tags</p>
             </div>
           </div>
         </div>
