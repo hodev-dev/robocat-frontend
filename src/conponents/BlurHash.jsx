@@ -1,5 +1,6 @@
 import React from 'react';
 import { useBlurhash } from '../helper/use-blurhash';
+import Loading from '../pages/Loading';
 const BlurHash = ({ hash, width, height, punch, className, hide }) => {
   const [url] = useBlurhash(hash, width, height, punch);
 
@@ -11,7 +12,7 @@ const BlurHash = ({ hash, width, height, punch, className, hide }) => {
 
   if (url === null) {
     return (
-      <h1 className={"text-2xl text-center text-yellow-500"}>loading</h1>
+      <Loading />
     )
   } else if (url === undefined) {
     return (
@@ -31,4 +32,4 @@ const BlurHash = ({ hash, width, height, punch, className, hide }) => {
   }
 }
 
-export default BlurHash
+export default React.memo(BlurHash);

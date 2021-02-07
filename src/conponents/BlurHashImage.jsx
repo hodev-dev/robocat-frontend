@@ -1,21 +1,26 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import BlurHash from './BlurHash';
 
-const BlurHashImage = ({ hash, width, height, punch, className, image }) => {
+const BlurHashImage = ({ hash, width, height, punch, className, image, slug }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [unMount, setUnMount] = useState(false);
   const [error, setError] = useState(false);
 
-  const onLoad = () => {
-    console.log('run');
+  const onLoad = useCallback(() => {
     setTimeout(() => {
       setIsLoaded(true);
       setUnMount(true);
-    }, 2000);
-  }
+    }, 300);
+  }, []);
+
   const onError = () => {
     console.log('error');
   }
+
+  useEffect(() => {
+    console.log(slug + ' ' + 'rerender');
+  }, [])
+
   return (
     <>
       {(unMount === false)
@@ -30,6 +35,7 @@ const BlurHashImage = ({ hash, width, height, punch, className, image }) => {
         :
         null
       }
+
       {(error === true) ?
         <BlurHash
           className={className}
@@ -40,7 +46,6 @@ const BlurHashImage = ({ hash, width, height, punch, className, image }) => {
         />
         :
         <img
-          loading={"eager"}
           onLoad={() => onLoad()}
           onError={() => onError()}
           className={(isLoaded === true) ? className : "hidden"}
@@ -48,9 +53,8 @@ const BlurHashImage = ({ hash, width, height, punch, className, image }) => {
           alt="cover"
         />
       }
-
     </>
   )
 }
 
-export default BlurHashImage
+export default React.memo(BlurHashImage);
