@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import BlurHash from './BlurHash';
 
 const BlurHashImage = ({ hash, width, height, punch, className, image, slug }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [unMount, setUnMount] = useState(false);
-  const [error, setError] = useState(false);
+  const [error] = useState(false);
 
   const onLoad = useCallback(() => {
     setTimeout(() => {
@@ -16,10 +16,6 @@ const BlurHashImage = ({ hash, width, height, punch, className, image, slug }) =
   const onError = () => {
     console.log('error');
   }
-
-  useEffect(() => {
-    console.log(slug + ' ' + 'rerender');
-  }, [])
 
   return (
     <>

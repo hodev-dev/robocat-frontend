@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Header from '../conponents/Header.jsx';
-import Scafold from '../conponents/Scafold.jsx';
-import Selection from '../conponents/Selection';
-import { Axios } from '../helper/axios_config';
-import Loading from './Loading';
+import { useDispatch, useSelector } from 'react-redux';
+import Header from '../../conponents/Header.jsx';
+import Scafold from '../../conponents/Scafold.jsx';
+import Selection from '../../conponents/Selection';
+import TabBar from "../../conponents/TabBar";
+import { Axios } from '../../helper/axios_config';
+import { explorerTabSelector, findIdByName, select, tabs } from '../../redux/explorerTabSlice';
+import Loading from '../Loading';
+
 const STATUS = {
   "LOADING": 0,
   "SUCCESS": 1,
@@ -12,12 +16,18 @@ const STATUS = {
 }
 
 const Explorer = () => {
+  const dispatch = useDispatch();
+  const explorerTabState = useSelector(explorerTabSelector);
   const [selections, setSelections] = useState([]);
-  const [selectionsStatus, setSelectionsStatus] = useState(STATUS.LOADING);
   const [page, setPage] = useState(1);
   const [nextPage, setNextPage] = useState('not null');
   const [length, setLength] = useState(0);
   const [hasMore, setHasMore] = useState(true);
+
+  useEffect(() => {
+    const tab = findIdByName(tabs, "Selections");
+    dispatch(select(tab.id));
+  }, [])
 
   useEffect(() => {
     request_collection();
@@ -34,10 +44,8 @@ const Explorer = () => {
           }
           setLength(length + per_page);
           setSelections((prevState) => prevState.concat([...data]));
-          setSelectionsStatus(STATUS.SUCCESS);
         }, 2000);
       }).catch((err) => {
-        setSelectionsStatus(STATUS.FAILED);
       });
     }
   };
@@ -59,28 +67,9 @@ const Explorer = () => {
       <Header />
       <div className={"flex flex-col items-center w-full h-auto"}>
         <div className={"w-full h-auto mt-0.5 bg-arc-dark_1"}>
-          <div className={"flex flex-row flex-wrap w-full h-auto mt-2 rounded-xl"}>
-            <div className={"flex items-center justify-center flex-1 border-b-2 border-arc-accent_2 h-14 bg-arc-dark_1"}>
-              <p className={"text-2xl font-bold text-white"}>Selections</p>
-            </div>
-            <div className={"flex items-center justify-center flex-1 h-14 bg-arc-dark_1"}>
-              <p className={"text-2xl font-bold text-white"}>Genres</p>
-            </div>
-            <div className={"flex items-center justify-center flex-1 ml-5 h-14 bg-arc-dark_1"}>
-              <p className={"text-2xl font-bold text-white"}>Platforms</p>
-            </div>
-            <div className={"flex items-center justify-center flex-1 ml-5 h-14 bg-arc-dark_1"}>
-              <p className={"text-2xl font-bold text-white"}>Stores</p>
-            </div>
-            <div className={"flex items-center justify-center flex-1 ml-5 h-14 bg-arc-dark_1"}>
-              <p className={"text-2xl font-bold text-white"}>Collections</p>
-            </div>
-            <div className={"flex items-center justify-center flex-1 ml-5 h-14 bg-arc-dark_1"}>
-              <p className={"text-2xl font-bold text-white"}>Tags</p>
-            </div>
-          </div>
+          <TabBar tabs={explorerTabState} />
         </div>
-        <div className={"w-11/12 h-auto"} >
+        <div className={"w-full h-auto"} >
           <InfiniteScroll
             dataLength={length}
             next={fetchMore}
@@ -104,7 +93,7 @@ const Explorer = () => {
           </InfiniteScroll>
         </div>
       </div>
-    </Scafold>
+    </Scafold >
   )
 }
 

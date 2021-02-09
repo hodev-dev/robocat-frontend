@@ -6,7 +6,10 @@ import {
 } from "react-router-dom";
 // route
 import { PrivateRoute } from './helper/PrivateRoute';
-import Explorer from './pages/Explorer';
+import Explorer from './pages/explorer/Explorer';
+import Genres from './pages/explorer/Genres';
+import Platforms from './pages/explorer/Platforms';
+import Stores from './pages/explorer/Stores';
 import ForgetPass from './pages/ForgetPass';
 import Loading from './pages/Loading';
 // redux 
@@ -33,6 +36,7 @@ function App() {
   return (
     <Router >
       <Switch>
+        <Route exact path="/" component={Explorer} />
         <Route exact path="/login">
           <PrivateRoute loadingComponent={Loading} status={authStatus} isLogedIn={authState.isLogedIn} component={User} loginComponent={Login} />
         </Route>
@@ -42,10 +46,12 @@ function App() {
         <Route exact path="/forget">
           <PrivateRoute loadingComponent={Loading} status={authStatus} isLogedIn={authState.isLogedIn} component={User} loginComponent={ForgetPass} />
         </Route>
-        <Route path="/user">
+        <Route exact path="/user">
           <PrivateRoute loadingComponent={Loading} status={authStatus} isLogedIn={authState.isLogedIn} component={User} loginComponent={Login} />
         </Route>
-        <Route path="/" component={Explorer} />
+        <Route exact path="/genres" component={Genres} />
+        <Route exact path="/platforms" component={Platforms} />
+        <Route exact path="/stores" component={Stores} />
       </Switch>
     </Router >
   );
