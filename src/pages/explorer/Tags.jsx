@@ -3,59 +3,72 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '../../conponents/Header.jsx';
 import Scafold from '../../conponents/Scafold.jsx';
-import Selection from '../../conponents/Selection';
 import TabBar from "../../conponents/TabBar";
 import { Axios } from '../../helper/axios_config';
 import { explorerTabSelector, findIdByName, select, tabs } from '../../redux/explorerTabSlice';
-import Loading from '../Loading';
+import { setTags, tagsSelector, unmountTags } from '../../redux/tagsSlice';
+import Loading from '../Loading.jsx';
 
 const STATUS = {
-  "LOADING": 0,
-  "SUCCESS": 1,
-  "FAILED": 2
+  LOADING: 0,
+  SUCCESS: 1,
+  FAILED: 2
 }
 
-const Explorer = () => {
+const Tags = () => {
   const _isMounted = useRef(true);
   const _timer = useRef(true);
   const dispatch = useDispatch();
   const explorerTabState = useSelector(explorerTabSelector);
-  const [selections, setSelections] = useState([]);
+  const tagsState = useSelector(tagsSelector);
   const [page, setPage] = useState(1);
   const [nextPage, setNextPage] = useState('not null');
   const [length, setLength] = useState(0);
   const [hasMore, setHasMore] = useState(true);
 
+
   useEffect(() => {
-    const tab = findIdByName(tabs, "Selections");
+    const tab = findIdByName(tabs, "Tags");
     dispatch(select(tab.id));
     return () => {
       _isMounted.current = false;
+      dispatch(unmountTags());
       clearTimeout(_timer.current);
     }
   }, [])
 
   useEffect(() => {
-    request_collection();
+    if (_isMounted.current) {
+      requestTags();
+    }
   }, [page])
 
-  const request_collection = () => {
+  const requestTags = () => {
     if (nextPage !== null) {
-      Axios.get('public/selections_with_games?page=' + page).then((result) => {
+      Axios.get('public/get_tags?page=' + page).then((result) => {
         _timer.current = setTimeout(() => {
-          if (_isMounted.current) {
-            const { data, next_page_url, per_page, to, total } = result.data;
-            setNextPage(next_page_url);
-            if (to === total) {
-              setHasMore(false);
-            }
-            setLength(length + per_page);
-            setSelections((prevState) => prevState.concat([...data]));
+          const { data, next_page_url, per_page, to, total } = result.data;
+          setNextPage(next_page_url);
+          if (to === total) {
+            setHasMore(false);
           }
+          setLength(length + per_page);
+          dispatch(setTags(data));
         }, 2000);
       }).catch((err) => {
+        console.log(err);
       });
     }
+  }
+
+  const renderTags = () => {
+    return tagsState.data.map((tag) => {
+      return (
+        <div key={tag.slug} className={"flex items-center justify-center w-1/5 h-48 text-2xl text-white border bg-arc-dark_1 rounded-xl border-arc-dark_2"}>
+          {"#" + tag.name}
+        </div>
+      );
+    });
   };
 
   const fetchMore = () => {
@@ -64,12 +77,10 @@ const Explorer = () => {
       setPage(page + 1);
     }
   };
-
   const refreshData = () => {
     console.log("refresh data");
     return 0;
   }
-
   return (
     <Scafold className={''}>
       <Header />
@@ -77,7 +88,7 @@ const Explorer = () => {
         <div className={"w-full h-auto mt-0.5 bg-arc-dark_1"}>
           <TabBar tabs={explorerTabState} />
         </div>
-        <div className={"w-full h-auto"} >
+        <div className={"w-full h-auto"}>
           <InfiniteScroll
             dataLength={length}
             next={fetchMore}
@@ -97,7 +108,9 @@ const Explorer = () => {
               <h3 style={{ textAlign: 'center' }}>&#8593; Release to refresh</h3>
             }
           >
-            <Selection selection={selections} />
+            <div className={"flex flex-row flex-wrap w-full h-auto"}>
+              {renderTags()}
+            </div>
           </InfiniteScroll>
         </div>
       </div>
@@ -105,4 +118,4 @@ const Explorer = () => {
   )
 }
 
-export default Explorer
+export default Tags

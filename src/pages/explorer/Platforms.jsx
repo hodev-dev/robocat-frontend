@@ -31,11 +31,9 @@ const Platforms = () => {
   const requestPlatforms = () => {
     if (platformsState.data.length === 0) {
       Axios.get('public/get_platforms').then((response) => {
-        setTimeout(() => {
-          console.log({ response });
-          const { data } = response;
-          dispatch(setPlatforms({ data: data, loading: STATUS.SUCCESS }));
-        }, 2000);
+        console.log({ response });
+        const { data } = response;
+        dispatch(setPlatforms({ data: data, loading: STATUS.SUCCESS }));
       }).catch((err) => {
         console.log(err)
       });
@@ -48,9 +46,9 @@ const Platforms = () => {
         <Loading />
       );
     } else if (platformsState.loading === STATUS.SUCCESS) {
-      return platformsState.data.map((platform) => {
+      return platformsState.data.map((platform, index) => {
         return (
-          <div key={platformsState.slug} className={"flex items-center justify-center w-1/5 h-48 text-2xl text-white border bg-arc-dark_1 rounded-xl border-arc-dark_2"}>
+          <div key={platformsState.name} className={"flex items-center justify-center w-1/5 h-48 text-2xl text-white border bg-arc-dark_1 rounded-xl border-arc-dark_2"}>
             {platform.name}
           </div>
         );

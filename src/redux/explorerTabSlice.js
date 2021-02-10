@@ -26,12 +26,6 @@ export const tabs = [
     selected: false,
   },
   {
-    id: "6faaf59f-569e-4b08-863d-e1e7b375b539",
-    route: 'collections',
-    name: "Collections",
-    selected: false,
-  },
-  {
     id: "a28394b0-4e0a-43ca-a76d-f2ef26a71dc3",
     route: 'tags',
     name: "Tags",

@@ -31,11 +31,9 @@ const Stores = () => {
   const requestStores = () => {
     if (storesState.data.length === 0) {
       Axios.get('public/get_stores').then((response) => {
-        setTimeout(() => {
-          console.log({ response });
-          const { data } = response;
-          dispatch(setStores({ data: data, loading: STATUS.SUCCESS }));
-        }, 2000);
+        console.log({ response });
+        const { data } = response;
+        dispatch(setStores({ data: data, loading: STATUS.SUCCESS }));
       }).catch((err) => {
         console.log(err)
       });

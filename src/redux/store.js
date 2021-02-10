@@ -8,6 +8,7 @@ import { explorerTabSlice } from './explorerTabSlice';
 import { genresSlice } from './genresSlice';
 import { platformsSlice } from './platformsSlice';
 import { storesSlice } from './storesSlice';
+import { tagsSlice } from './tagsSlice';
 
 
 const reducers = combineReducers({
@@ -16,7 +17,8 @@ const reducers = combineReducers({
   tabs: explorerTabSlice.reducer,
   genres: genresSlice.reducer,
   platforms: platformsSlice.reducer,
-  stores: storesSlice.reducer
+  stores: storesSlice.reducer,
+  tags: tagsSlice.reducer
 });
 
 const persistConfig = {

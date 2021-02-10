@@ -31,11 +31,9 @@ const Genres = () => {
   const requestGenres = () => {
     if (genresState.data.length === 0) {
       Axios.get('public/get_genres').then((response) => {
-        setTimeout(() => {
-          console.log({ response });
-          const { data } = response;
-          dispatch(setGenres({ data: data, loading: STATUS.SUCCESS }));
-        }, 2000);
+        console.log({ response });
+        const { data } = response;
+        dispatch(setGenres({ data: data, loading: STATUS.SUCCESS }));
       }).catch((err) => {
         console.log(err)
       });

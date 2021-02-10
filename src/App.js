@@ -10,6 +10,7 @@ import Explorer from './pages/explorer/Explorer';
 import Genres from './pages/explorer/Genres';
 import Platforms from './pages/explorer/Platforms';
 import Stores from './pages/explorer/Stores';
+import Tags from './pages/explorer/Tags';
 import ForgetPass from './pages/ForgetPass';
 import Loading from './pages/Loading';
 // redux 
@@ -52,6 +53,7 @@ function App() {
         <Route exact path="/genres" component={Genres} />
         <Route exact path="/platforms" component={Platforms} />
         <Route exact path="/stores" component={Stores} />
+        <Route exact path="/tags" component={Tags} />
       </Switch>
     </Router >
   );
