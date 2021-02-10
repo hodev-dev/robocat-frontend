@@ -12,7 +12,8 @@ import Loading from '../Loading';
 const STATUS = {
   "LOADING": 0,
   "SUCCESS": 1,
-  "FAILED": 2
+  "FAILED": 2,
+  "EMPTY": 3
 }
 
 const Explorer = () => {
@@ -21,6 +22,7 @@ const Explorer = () => {
   const dispatch = useDispatch();
   const explorerTabState = useSelector(explorerTabSelector);
   const [selections, setSelections] = useState([]);
+  const [selectionsStatus, setSelectionsStatus] = useState(STATUS.LOADING);
   const [page, setPage] = useState(1);
   const [nextPage, setNextPage] = useState('not null');
   const [length, setLength] = useState(0);
@@ -50,10 +52,16 @@ const Explorer = () => {
               setHasMore(false);
             }
             setLength(length + per_page);
-            setSelections((prevState) => prevState.concat([...data]));
+            if (data.length === 0) {
+              setSelectionsStatus(STATUS.EMPTY);
+            } else {
+              setSelections((prevState) => prevState.concat([...data]));
+              setSelectionsStatus(STATUS.SUCCESS);
+            }
           }
         }, 2000);
       }).catch((err) => {
+        setSelectionsStatus(STATUS.FAILED);
       });
     }
   };
@@ -69,6 +77,51 @@ const Explorer = () => {
     console.log("refresh data");
     return 0;
   }
+  let renderPage = null;
+
+  if (selectionsStatus === STATUS.LOADING) {
+    renderPage = <Loading />;
+  } else if (selectionsStatus === STATUS.SUCCESS) {
+    renderPage = (
+      <InfiniteScroll
+        dataLength={length}
+        next={fetchMore}
+        scrollThreshold={1}
+        hasMore={hasMore}
+        loader={<Loading />}
+        endMessage={
+          <p className={"w-full p-5 text-2xl text-center text-white"}>Yay! You have seen it all</p>
+        }
+        refreshFunction={refreshData}
+        pullDownToRefresh
+        pullDownToRefreshThreshold={50}
+        pullDownToRefreshContent={
+          <h3 style={{ textAlign: 'center' }}>&#8595; Pull down to refresh</h3>
+        }
+        releaseToRefreshContent={
+          <h3 style={{ textAlign: 'center' }}>&#8593; Release to refresh</h3>
+        }
+      >
+        <Selection selection={selections} />
+      </InfiniteScroll>
+    )
+  } else if (selectionsStatus === STATUS.EMPTY) {
+    renderPage = (
+      <div className={"flex items-center justify-center w-full h-80"}>
+        <h1 className={"text-xl text-white"}>nothing to show</h1>
+      </div>
+    )
+  } else if (selectionsStatus === STATUS.FAILED) {
+    renderPage = (
+      <div className={"flex items-center justify-center w-full h-80"}>
+        <h1 className={"text-xl text-white"}>Error</h1>
+      </div>
+    )
+  } else {
+    renderPage = (
+      <div>unknown error</div>
+    )
+  }
 
   return (
     <Scafold className={''}>
@@ -78,27 +131,7 @@ const Explorer = () => {
           <TabBar tabs={explorerTabState} />
         </div>
         <div className={"w-full h-auto"} >
-          <InfiniteScroll
-            dataLength={length}
-            next={fetchMore}
-            scrollThreshold={1}
-            hasMore={hasMore}
-            loader={<Loading />}
-            endMessage={
-              <p className={"w-full p-5 text-2xl text-center text-white"}>Yay! You have seen it all</p>
-            }
-            refreshFunction={refreshData}
-            pullDownToRefresh
-            pullDownToRefreshThreshold={50}
-            pullDownToRefreshContent={
-              <h3 style={{ textAlign: 'center' }}>&#8595; Pull down to refresh</h3>
-            }
-            releaseToRefreshContent={
-              <h3 style={{ textAlign: 'center' }}>&#8593; Release to refresh</h3>
-            }
-          >
-            <Selection selection={selections} />
-          </InfiniteScroll>
+          {renderPage}
         </div>
       </div>
     </Scafold >

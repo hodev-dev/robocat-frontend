@@ -18,10 +18,12 @@ const SelectionGames = (props) => {
           hash={game.background_image_hash}
           width={3}
           height={4}
-          className={"flex object-cover object-top h-80 rounded-xl"}
+          className={"flex object-cover object-top p-1 h-80 rounded-xl"}
           image={memoCreatePath(game)}
         />
-        <p className={"mt-2 text-sm text-center truncate text-arc-light_1"}>{game.name}</p>
+        <div className={"flex flex-row items-center justify-center w-full h-auto p-1"}>
+          <p className={"text-sm text-center text-white truncate"}>{game.name}</p>
+        </div>
       </div >
     )
   });

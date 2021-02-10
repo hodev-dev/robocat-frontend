@@ -18,8 +18,8 @@ export const tagsSlice = createSlice({
       state.loading = action.payload.loading;
     },
     unmountTags: (state) => {
-      state.data = [],
-        state.loading = true;
+      state.data = [];
+      state.loading = true;
     }
   }
 });

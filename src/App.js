@@ -12,6 +12,7 @@ import Platforms from './pages/explorer/Platforms';
 import Stores from './pages/explorer/Stores';
 import Tags from './pages/explorer/Tags';
 import ForgetPass from './pages/ForgetPass';
+import Game from './pages/Game';
 import Loading from './pages/Loading';
 // redux 
 import Login from './pages/Login.jsx';
@@ -50,10 +51,12 @@ function App() {
         <Route exact path="/user">
           <PrivateRoute loadingComponent={Loading} status={authStatus} isLogedIn={authState.isLogedIn} component={User} loginComponent={Login} />
         </Route>
+
         <Route exact path="/genres" component={Genres} />
         <Route exact path="/platforms" component={Platforms} />
         <Route exact path="/stores" component={Stores} />
         <Route exact path="/tags" component={Tags} />
+        <Route exact path="/game" component={Game} />
       </Switch>
     </Router >
   );
