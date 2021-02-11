@@ -5,6 +5,7 @@ import storage from 'redux-persist/lib/storage'; // defaults to localStorage for
 import { authSlice } from './authSlice';
 import { counterSlice } from './counterSlice';
 import { explorerTabSlice } from './explorerTabSlice';
+import { gameTabs } from './gameTabSlice';
 import { genresSlice } from './genresSlice';
 import { platformsSlice } from './platformsSlice';
 import { storesSlice } from './storesSlice';
@@ -18,7 +19,8 @@ const reducers = combineReducers({
   genres: genresSlice.reducer,
   platforms: platformsSlice.reducer,
   stores: storesSlice.reducer,
-  tags: tagsSlice.reducer
+  tags: tagsSlice.reducer,
+  gameTabs: gameTabs.reducer
 });
 
 const persistConfig = {

@@ -4,7 +4,7 @@ module.exports = {
   arc: {
     dark_1: '#18181d',
     dark_2: '#202026',
-    dark_3: '#202026',
+    dark_3: '#18181D',
     accent_1: '#6C7BFF',
     accent_2: '#13E398',
     accent_3: '#F14080',
