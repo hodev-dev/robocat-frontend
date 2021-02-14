@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Route, Switch
 } from "react-router-dom";
+import ScrollMemory from 'react-router-scroll-memory';
 // route
 import { PrivateRoute } from './helper/PrivateRoute';
 import Explorer from './pages/explorer/Explorer';
@@ -39,6 +40,7 @@ function App() {
 
   return (
     <Router >
+      <ScrollMemory />
       <Switch>
         <Route exact path="/" component={Explorer} />
         <Route exact path="/login">
@@ -60,6 +62,9 @@ function App() {
         <Route exact path="/game" component={Game} />
         <Route exact path="/detail" component={Detail} />
         <Route exact path="/screenshot" component={Screenshot} />
+        <Route>
+          <h1>not found</h1>
+        </Route>
       </Switch>
     </Router >
   );

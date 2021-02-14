@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import SelectionGames from './SelectionGames';
 
 const Selection = (props) => {
@@ -15,9 +16,11 @@ const Selection = (props) => {
               <h1 className={"self-end text-4xl text-white"}>{selection.title}</h1>
             </div>
           </div> */}
-          <div className={"flex flex-row flex-wrap h-auto bg-arc-dark_1 rounded-xl"}>
-            <SelectionGames key={selection.title.toString()} selection={selection} />
-          </div>
+          <Link to={"game"}>
+            <div className={"flex flex-row flex-wrap h-auto bg-arc-dark_1 rounded-xl"}>
+              <SelectionGames key={selection.title.toString()} selection={selection} />
+            </div>
+          </Link>
         </div >
       </div>
     )

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Logo from '../conponents/Logo';
 
 const Header = () => {
@@ -8,7 +9,9 @@ const Header = () => {
       </div>
       <input placeholder={"Search"} className={"w-full h-10 p-2 text-lg text-center rounded-sm outline-none lg:w-6/12 bg-arc-dark_2 text-arc-light_1"} type="text" />
       <div className={'items-center justify-end hidden w-4/12 lg:flex'}>
-        <Logo className={"w-12 h-12 mr-28"} />
+        <Link to={"/"}>
+          <Logo className={"w-12 h-12 mr-28"} />
+        </Link>
       </div>
     </div>
   )

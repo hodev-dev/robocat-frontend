@@ -90,7 +90,7 @@ const Game = () => {
         <div className={"w-6/12 h-auto mt-4 bg-arc-dark_1 "}>
           <div className={"flex items-center w-full h-auto p-1 border-b-2 border-arc-dark_2"} dir={"rtl"}>
             <div className={"w-2 h-2 p-2 ml-2 mr-2 text-xl text-white bg-yellow-200 rounded-full"}></div>
-            <h1 className={"p-2 text-xl text-white"} > ویتچر</h1>
+            <h1 className={"p-2 text-xl text-white font-shabnam"} > ویتچر</h1>
           </div>
           <div className={"flex flex-row"}>
             <Carousel showArrows={true} swipeable={true} emulateTouch={true} showThumbs={false}>
