@@ -66,12 +66,8 @@ const Game = () => {
           <div className={"flex flex-col items-center justify-center w-full h-auto select-none"}>
             <img className={"object-cover w-full rounded-xl"} src={Cover1} alt="" srcset="" />
           </div>
-          <div className={`flex flex-col w-full h-auto p-2 bg-arc-dark_2  border-gray-800 border `} dir={"auto"}>
-            <div className={"flex flex-row items-center p-1 ml-2 mr-2 text-xl font-semibold text-gray-100 font-shabnam"}>بازی «ویچر ۳: وایلد هانت»</div>
-            <hr className={"mt-1 border-gray-800"} />
-            <div className={"flex flex-row p-1 mt-2 ml-2 mr-2 text-base text-gray-100 font-shabnam"}>
-              بازی «ویچر ۳: وایلد هانت» (Witcher3: Wild Hunt) چندهفته‌ای است که فانتزی‌دوستان نقش‌آفرینی‌باز را از کار و زندگی انداخته است. «ویچر ۳» که نقطه پایانی بر سفر گرالت ریویایی است،‌ حسابی از سوی منتقدان مورد ستایش قرار گرفته است. در ادامه با زومجی همراه باشید تا به بررسی این بازی  بپردازیم.
-            </div>
+          <div className={`flex flex-row w-full h-auto p-2 bg-all-arc-accent_1  border-gray-800 border `} dir={"auto"}>
+            <div className={"flex flex-row items-center p-1 ml-2 mr-2 text-xl font-bold text-white cursor-pointer font-sahel hover:underline"}>اطلاعات بیشتر</div>
           </div>
           <div className={"flex items-center w-full h-auto p-2"}>
             <img className={"object-cover w-10 h-10 border-2 rounded-full border-arc-dark_1"} src={Cover1} alt="" srcset="" />

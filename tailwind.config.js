@@ -32,9 +32,11 @@ module.exports = {
       '2xl': '1536px',
     },
     colors: {
+      all: colors,
       transparent: 'transparent',
       current: 'currentColor',
       arc: colors.arc,
+      rose: colors.rose,
       black: colors.black,
       white: colors.white,
       gray: colors.coolGray,
