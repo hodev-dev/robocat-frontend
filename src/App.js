@@ -7,6 +7,7 @@ import {
 import ScrollMemory from 'react-router-scroll-memory';
 // route
 import { PrivateRoute } from './helper/PrivateRoute';
+import CreatePost from './pages/CreatePost';
 import Explorer from './pages/explorer/Explorer';
 import Genres from './pages/explorer/Genres';
 import Platforms from './pages/explorer/Platforms';
@@ -62,6 +63,7 @@ function App() {
         <Route exact path="/game" component={Game} />
         <Route exact path="/detail" component={Detail} />
         <Route exact path="/screenshot" component={Screenshot} />
+        <Route exact path="/createPost" component={CreatePost} />
         <Route>
           <h1>not found</h1>
         </Route>

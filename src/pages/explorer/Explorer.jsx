@@ -127,7 +127,7 @@ const Explorer = () => {
     <Scafold className={''}>
       <Header />
       <div className={"flex flex-col items-center w-full h-auto"}>
-        <div className={"w-full h-auto mt-0.5 bg-arc-dark_1"}>
+        <div className={"w-full h-auto mt-0.5 bg-arc-dark_1 sticky top-0"}>
           <TabBar tabs={explorerTabState} />
         </div>
         <div className={"w-full h-auto"} >
